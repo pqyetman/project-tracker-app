@@ -13,7 +13,7 @@ function Customers({searchData}) {
       })
     const mappedCustomers = filteredCustomers.map(customer => (<IndividualCustomer customer={customer} key={customer.id} />))
 
-    console.log(customers)
+   
     return (
         <>
            

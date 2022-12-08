@@ -5,11 +5,11 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom'
 
+function Navigation({ setSearchData, currentUser, setPage }) {
 
-function Navigation({ setSearchData }) {
-
-
+    const history = useHistory()
     const [searchField, setSearchField] = useState("None")
 
 
@@ -34,6 +34,11 @@ function Navigation({ setSearchData }) {
      }
 
 
+     function signOut(){
+        setPage("/")  
+        history.push("/")
+
+     }
 
 
     return (
@@ -78,7 +83,7 @@ function Navigation({ setSearchData }) {
                             <option>{searchField}</option>
                         </Form.Select>
                     </Form.Group>
-                    <Button size="sm" variant="secondary">Sign Out</Button>
+                    <Button onClick ={signOut}size="sm" variant="secondary">Sign Out</Button>
                 </Navbar.Collapse>
             </Container>
         </Navbar>

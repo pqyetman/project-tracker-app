@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import IndividualProject from "./IndividualProject";
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
-
+import { useEffect } from "react";
 function Projects({ searchData }) {
 
     const projects = useSelector((state) => state.projects.entities);
@@ -18,6 +18,13 @@ function Projects({ searchData }) {
         console.log(event)
 
     }
+
+    useEffect(() => {
+
+ 
+        console.log("Project Render")
+     
+       }, []);
 
     return (
        
