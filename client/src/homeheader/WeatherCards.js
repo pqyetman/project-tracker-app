@@ -1,82 +1,84 @@
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
+
 import ListGroup from 'react-bootstrap/ListGroup';
 import {
     TiWeatherCloudy, TiWeatherShower, TiWeatherSnow, TiWeatherStormy, TiWeatherSunny, TiWeatherWindyCloudy,
-    TiWeatherWindy, TiWeatherDownpour, TiWeatherNight, TiWeatherPartlySunny
+    TiWeatherDownpour, TiWeatherPartlySunny
 } from "react-icons/ti";
 
 function WeatherCards({ day }) {
 
     const { date, temp2m, wind10m_max, weather } = day;
 
-       //temp correction to Fahrenheight
+    //temp correction to Fahrenheight
 
-       const fahrenheightWeatherMin = ((temp2m.min)*9/5) + 32
-       const fahrenheightWeatherMax = ((temp2m.max)*9/5) + 32
+    const fahrenheightWeatherMin = ((temp2m.min) * 9 / 5) + 32
+    const fahrenheightWeatherMax = ((temp2m.max) * 9 / 5) + 32
 
-       //date correction
-       function reOrderDate(date) {
+    //date correction
+    function reOrderDate(date) {
 
         let dateStr = date.toString()
         const dateFirst = dateStr.slice(0, 4);
         const dateMiddle = dateStr.slice(4, 6);
-        const dateLast = dateStr.slice(6, 8); 
+        const dateLast = dateStr.slice(6, 8);
         let fixedDate = `Date:  ${dateMiddle}/${dateLast}/${dateFirst}`
-      
+
         return fixedDate
-      }
+    }
 
-        const reverseDate = reOrderDate(date)
+    const reverseDate = reOrderDate(date)
 
-        //windspeed
+    //windspeed
 
-        function interpretWindAPI(wind10m_max) {
-          
-            let output = ''
-          
-            switch (wind10m_max) {
-          
-              case 1:
+    function interpretWindAPI(wind10m_max) {
+
+        let output = ''
+
+        switch (wind10m_max) {
+
+            case 1:
                 output = 'Calm Breeze';
                 break;
-          
-              case 2:
+
+            case 2:
                 output = 'Light Breeze';
                 break;
-          
-              case 3:
+
+            case 3:
                 output = 'Moderate Breeze';
                 break;
-          
-              case 4:
+
+            case 4:
                 output = 'Fresh Beeze';
                 break;
-          
-              case 5:
+
+            case 5:
                 output = 'Strong Winds';
                 break;
-          
-              case 6:
+
+            case 6:
                 output = 'Gale Force Winds';
                 break;
-          
-              case 7:
+
+            case 7:
                 output = 'Stormy Winds';
                 break;
-              case 8:
+            case 8:
                 output = 'Here I am...rock you like a hurricane';
                 break;
-          
-            }
-            return output
-          
-          }
-    
+            default:
+                output = "No Data";
+
+        }
+        return output
+
+    }
+
     const windTranslation = interpretWindAPI(wind10m_max)
-        
- 
+
+
 
     function filterWeather(weather) {
 
@@ -163,7 +165,7 @@ function WeatherCards({ day }) {
             <Card style={{ width: '20rem' }}>
                 {displayPicture}
                 <Card.Body>
-                    <Card.Title>{reverseDate}</Card.Title>               
+                    <Card.Title>{reverseDate}</Card.Title>
                 </Card.Body>
                 <ListGroup className="list-group-flush">
                     <ListGroup.Item>Conditions: {displayString}</ListGroup.Item>

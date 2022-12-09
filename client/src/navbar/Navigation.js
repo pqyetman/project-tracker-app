@@ -3,11 +3,10 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom'
 
-function Navigation({ setSearchData, currentUser, setPage }) {
+function Navigation({ setSearchData, currentUser, setPage, updateUser }) {
 
     const history = useHistory()
     const [searchField, setSearchField] = useState("None")
@@ -31,14 +30,24 @@ function Navigation({ setSearchData, currentUser, setPage }) {
                 setSearchField("None")
         }
 
-     }
+    }
 
 
-     function signOut(){
-        setPage("/")  
-        history.push("/")
+    function signOut() {
 
-     }
+        fetch("/logout", { method: "DELETE" }).then((r) => {
+            if (r.ok) {
+                updateUser(null);
+            }
+            setPage("/")
+            history.push("/")
+        });
+        
+    
+
+    }
+
+    
 
 
     return (
@@ -53,21 +62,8 @@ function Navigation({ setSearchData, currentUser, setPage }) {
                         navbarScroll
                     >
                         <Nav.Link href="/r-customers">Customers</Nav.Link>
-                        <Nav.Link href="/r-employees">Employees</Nav.Link>
-                        <NavDropdown title="Link" id="navbarScrollingDropdown">
-                            <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-                            <NavDropdown.Item href="#action4">
-                                Another action
-                            </NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item href="#action5">
-                                Something else here
-                            </NavDropdown.Item>
-                        </NavDropdown>
-                        <Nav.Link href="#" disabled>
-                            Link
-                        </Nav.Link>
-                    </Nav>                
+                        <Nav.Link href="/r-employees">Employees</Nav.Link>                    
+                    </Nav>                  
                     <Form.Group className="d-flex">
                         <Form.Control style={{ margin: "0px 20px 0px 3px" }}
                             onChange={handleSearch}
@@ -75,7 +71,7 @@ function Navigation({ setSearchData, currentUser, setPage }) {
                             placeholder="Search"
                             className="me-2"
                             aria-label="Search"
-                        />                                                
+                        />
                     </Form.Group>
                     <Form.Group className="d-flex" style={{ color: "white" }}>
                         <Form.Label style={{ margin: "0px 20px 0px 3px" }}>Search Field</Form.Label>
@@ -83,7 +79,7 @@ function Navigation({ setSearchData, currentUser, setPage }) {
                             <option>{searchField}</option>
                         </Form.Select>
                     </Form.Group>
-                    <Button onClick ={signOut}size="sm" variant="secondary">Sign Out</Button>
+                    <Button onClick={signOut} size="sm" variant="secondary">Sign Out</Button>
                 </Navbar.Collapse>
             </Container>
         </Navbar>

@@ -15,6 +15,7 @@ function TasksTable({ task }) {
         }).then(res => {
                 if (res.ok) {
                    console.log("Task Deleted")
+                   dispatch(tasksDeleted(id))
                     }
 
                  else {
@@ -24,7 +25,7 @@ function TasksTable({ task }) {
 
             })
 
-            dispatch(tasksDeleted(id))
+          
     }
 
 

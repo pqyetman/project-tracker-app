@@ -1,37 +1,29 @@
 class EmployeesController < ApplicationController
-  skip_before_action :authorize, only: :index
+  skip_before_action :authorize, only: [:index, :show]
 
   # GET /employees
   def index
-    @employees = Employee.all
-
-    render json: @employees
+    employees = Employee.all
+    render json: employees
   end
 
   # GET /employees/1
   def show
-    render json: @employee
+    employee = Employee.find(params[:id])
+    render json: employee
   end
 
   # POST /employees
-  def create
-    @employee = Employee.new(employee_params)
+  def create        
+    employee = Employee.create!(employee_params)
+    render json: employee, status: :created       
+  end 
 
-    if @employee.save
-      render json: @employee, status: :created, location: @employee
-    else
-      render json: @employee.errors, status: :unprocessable_entity
-    end
-  end
-
-  # PATCH/PUT /employees/1
   def update
-    if @employee.update(employee_params)
-      render json: @employee
-    else
-      render json: @employee.errors, status: :unprocessable_entity
-    end
-  end
+    employee = Employee.find(params[:id])       
+    employee.update!(employee_params)
+    render json: employee, status: :ok    
+  end 
 
   # DELETE /employees/1
   def destroy

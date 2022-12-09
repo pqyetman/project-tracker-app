@@ -20,7 +20,7 @@ const customersSlice = createSlice({
     },
     customersUpdated(state, action) {
       const customer = state.entities.find((customer) => customer.id === action.payload.id);
-      customer.title = action.payload.open;
+      customer.projects = action.payload.projects;
     },
     customersDeleted(state, action) {
       

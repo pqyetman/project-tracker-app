@@ -8,24 +8,35 @@ import Card from 'react-bootstrap/Card';
 import { useHistory } from 'react-router-dom'
 import { useState } from 'react'
 
-function SignIn({updateUser}) {
+function SignIn({updateUser, setPage}) {
 
     const [formData, setFormData] = useState({
         username: '',
         password: ''
     })
+
+    const { username, password } = formData
     
     const history = useHistory()
 
-    const { username, password } = formData
-
-
+  
+ 
 
     const handleChange = (e) => {
 
         const { name, value } = e.target
         setFormData({ ...formData, [name]: value })
     }
+
+    const handleGuestSignIn = () => {
+
+
+        setPage("/r-projects")
+        history.push(`/r-projects`)
+       
+    }
+
+
 
     function onSubmit(e) {
         e.preventDefault()
@@ -42,7 +53,7 @@ function SignIn({updateUser}) {
             .then(res => {
                 if (res.ok) {
                     res.json().then(user => {
-                     
+                        setPage("/r-projects")
                         updateUser(user)
                         history.push(`/r-projects`)
                     })
@@ -56,12 +67,19 @@ function SignIn({updateUser}) {
     }    
 
 
+
+
+
+
+  
+
     return (<>
 
         <Container fluid>
             <Row className="justify-content-center">
                 <h1 style={{ textAlign: "center", padding: '20px' }}>Project Tracker</h1>
-                <FontAwesomeIcon style={{ padding: '50px' }} icon={faBuilding} size="9x" className="center" bounce />
+                <FontAwesomeIcon style={{ padding: '50px' }} 
+                icon={faBuilding} size="9x" className="center" bounce />
                 <Card style={{ width: '18rem', padding: '25px' }}>
                     <Card.Body>
                         <Form onSubmit={onSubmit}>
@@ -81,7 +99,7 @@ function SignIn({updateUser}) {
                                 Submit
                             </Button>                           
                         </Form>
-                        <Button onClick = {()=> history.push(`/r-projects`) } style={{ margin: '10px'}} size="sm" variant="secondary" type="submit">
+                        <Button onClick = {handleGuestSignIn} style={{ margin: '10px'}} size="sm" variant="secondary" type="submit">
                                 Guest Sign In
                             </Button>
                     </Card.Body>

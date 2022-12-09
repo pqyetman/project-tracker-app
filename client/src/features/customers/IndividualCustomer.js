@@ -6,7 +6,10 @@ function IndividualCustomer({ customer }) {
 
     const [show, setShow] = useState(false);
     const handleShow = () => setShow(true);
+    const handleClose = () => setShow(false);
     const {projects} = customer;
+
+
     return (
         <>
             <tbody>
@@ -19,10 +22,11 @@ function IndividualCustomer({ customer }) {
                 </tr>
             </tbody>
             <CustomerProjects 
-            placement="bottom"
+            placement="end"
             show={show}
-            setShow={setShow} 
-            projects={projects}         
+            handleClose={handleClose} 
+            projects={projects}  
+            customer={customer}       
 
              />
         </>

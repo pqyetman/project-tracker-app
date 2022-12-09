@@ -1,37 +1,35 @@
 class CustomersController < ApplicationController
-  skip_before_action :authorize, only: :index
+  skip_before_action :authorize, only: [:index, :show]
 
   # GET /customers
   def index
-    @customers = Customer.all
-
-    render json: @customers
+    customers = Customer.all.order(:name)
+    render json: customers
   end
 
   # GET /customers/1
   def show
-    render json: @customer
+    customer = Customer.find(params[:id])
+    render json: customer
   end
 
   # POST /customers
-  def create
-    @customer = Customer.new(customer_params)
-
-    if @customer.save
-      render json: @customer, status: :created, location: @customer
-    else
-      render json: @customer.errors, status: :unprocessable_entity
-    end
+  def show
+    customer = Customer.find(params[:id])
+    render json: customer
   end
 
-  # PATCH/PUT /customers/1
+  # POST /employees
+  def create        
+    customer = Customer.create!(customer_params)
+    render json: customer, status: :created       
+  end 
+
   def update
-    if @customer.update(customer_params)
-      render json: @customer
-    else
-      render json: @customer.errors, status: :unprocessable_entity
-    end
-  end
+    customer = Customer.find(params[:id])       
+    customer.update!(customer_params)
+    render json: customer, status: :ok    
+  end 
 
   # DELETE /customers/1
   def destroy

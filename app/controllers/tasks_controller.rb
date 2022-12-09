@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
 
-  skip_before_action :authorize, only: [:create, :index, :show, :destroy]  
+    skip_before_action :authorize, only: [:index, :show]
 
   def index
       if params[:project_id]

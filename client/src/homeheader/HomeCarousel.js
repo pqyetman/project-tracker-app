@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import WeatherCards from "./WeatherCards"
 import Row from 'react-bootstrap/Row';
 import { v4 as uuid } from "uuid";
-import Container from 'react-bootstrap/Container';
+
 
 function HomeCarousel({ lat, lng, status, weather }) {
 
@@ -16,9 +16,8 @@ function HomeCarousel({ lat, lng, status, weather }) {
 
   useEffect(() => {
 
-    console.log("Side Render")
+    console.log("Carousel Render") 
     console.log(weather)
-
 
   }, []);
 

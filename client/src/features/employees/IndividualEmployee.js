@@ -1,27 +1,28 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
+import {IoAccessibilitySharp } from "react-icons/io5";
 
-function IndividualEmployee({employee}) {
+function IndividualEmployee({ employee }) {
 
-    const {name, title} = employee;
+  const { name, title } = employee;
+  const randColor = Math.floor(Math.random()*16777215).toString(16)
 
-    return (
-      <Col>
-      <Card >
-        <Card.Img variant="top" src="https://cdn.vox-cdn.com/thumbor/riVjTppDToD88VCvcKJS9ie-ngQ=/0x0:1600x1213/1920x0/filters:focal(0x0:1600x1213):format(webp):no_upscale()/cdn.vox-cdn.com/uploads/chorus_asset/file/13890680/Try_Watching_Office_Space_Online.jpg" />
+  return (
+    <Col>
+      <Card>
+        <IoAccessibilitySharp style={{color: `#${randColor}`}} size={150}/>
         <Card.Body>
-          <Card.Title>Name: {name}</Card.Title>
-          <Card.Text>
-          Title: {title}
-          </Card.Text>
+          <Card.Title>{name}</Card.Title>
         </Card.Body>
         <Card.Footer>
-          <Button>Create Task</Button>
+          <Card.Text>
+            Title: {title}
+          </Card.Text>
         </Card.Footer>
       </Card>
-      </Col>
-    );
-  }
+    </Col>
+  );
+}
 
 export default IndividualEmployee; 

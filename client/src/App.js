@@ -15,16 +15,16 @@ function App() {
 
   const [searchData, setSearchData] = useState("")
   const [currentUser, setCurrentUser] = useState(false)
-
   const [lat, setLat] = useState(null);
   const [lng, setLng] = useState(null);
   const [status, setStatus] = useState(null);
   const [weather, setWeather] = useState([])
   const [page, setPage] = useState("/")
- 
-  
+
+
 
   const dispatch = useDispatch();
+
 
   const getLocation = () => {
     if (!navigator.geolocation) {
@@ -42,12 +42,11 @@ function App() {
   }
 
 
-
   const updateUser = (user) => setCurrentUser(user)
 
   useEffect(() => {
 
-    console.log("main Render")
+  
     fetch("/me").then((r) => {
       if (r.ok) {
         r.json().then((user) => updateUser(user));
@@ -58,44 +57,74 @@ function App() {
     dispatch(fetchProjects());
     dispatch(fetchCustomers());
     dispatch(fetchEmployees());
-    getLocation()
-  
-   
-    setPage(window.location.pathname)
-  
 
-  }, [currentUser, dispatch]);
+    console.log(`this is lat ${lat}`)
+
+    console.log(`this is lng ${lng}`)
+    console.log(`this is status ${status}`)
+    console.log(`this is weather ${weather}`)
+    console.log(`this is page ${page}`)
+
+
+
+    setPage(window.location.pathname)
+
+
+
+  }, []);
+
 
   useEffect(() => {
+
+    if (lng & lat ) {
+        console.log('lng at lat are good')
+    }
+
+    else {
+
+        getLocation() 
+    
+    }
+
+
+   
+    console.log("Get Location Use Effect");     
+         
+  }, []);
+
+useEffect(() => {
 
     fetch( `http://www.7timer.info/bin/civillight.php?lon=${lng}&lat=${lat}&ac=0&lang=en&unit=metric&output=json&tzshift=0`)
     .then((res) => res.json())
     .then(data => setWeather(data.dataseries));
   
+    console.log("Fetch Use Effect");  
 
   }, [lng, lat]);
-    
+
 
   return (
     <div>
-   
-      <Navigation setPage={setPage} currentUser = {currentUser} setSearchData={setSearchData}/>
+
+      <Navigation setPage={setPage} currentUser={currentUser} 
+      updateUser={updateUser}
+      setSearchData={setSearchData} />
       {page === "/" ? <></> : <HomeCarousel lat={lat} lng={lng} status={status} weather={weather} />}
       <Switch>
         <Route exact path="/">
-          <SignIn />
-        </Route>      
+          <SignIn setPage={setPage} updateUser={updateUser} />
+        </Route>
         <Route exact path="/r-customers">
-          <Customers searchData={searchData}/>
+          <Customers searchData={searchData} />
         </Route>
         <Route exact path="/r-employees">
-          <Employees searchData={searchData}/>
+          <Employees searchData={searchData} />
         </Route>
         <Route exact path="/r-projects" >
-          <Projects searchData={searchData}/>
+          <Projects searchData={searchData} />
         </Route>
       </Switch>
-     
+
     </div>
   );
 }
