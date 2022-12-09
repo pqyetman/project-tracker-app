@@ -1,12 +1,15 @@
 import Table from 'react-bootstrap/Table';
 import { useSelector } from "react-redux";
 import IndividualCustomer from "./IndividualCustomer"
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBuilding } from '@fortawesome/free-solid-svg-icons'
+import Row from 'react-bootstrap/Row';
 
 
 function Customers({searchData}) {
 
     const customers = useSelector((state) => state.customers.entities);
+    const customerStatus = useSelector((state) => state.customers.status);
 
     const filteredCustomers = customers.filter(customer => {
         return customer.name.toLowerCase().includes(searchData.toLowerCase())
@@ -27,6 +30,7 @@ function Customers({searchData}) {
                 </thead>
                 {mappedCustomers}
             </Table>
+            {customerStatus === "loading" ? <Row className="justify-content-center" > <FontAwesomeIcon style={{ padding: '50px' }} icon={faBuilding} size="9x" className="center" bounce /> </Row>: ""}
         </>
 
     )

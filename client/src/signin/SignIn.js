@@ -8,7 +8,7 @@ import Card from 'react-bootstrap/Card';
 import { useHistory } from 'react-router-dom'
 import { useState } from 'react'
 
-function SignIn({updateUser, setPage}) {
+function SignIn({ updateUser, setPage }) {
 
     const [formData, setFormData] = useState({
         username: '',
@@ -16,11 +16,11 @@ function SignIn({updateUser, setPage}) {
     })
 
     const { username, password } = formData
-    
+
     const history = useHistory()
 
-  
- 
+
+
 
     const handleChange = (e) => {
 
@@ -33,7 +33,7 @@ function SignIn({updateUser, setPage}) {
 
         setPage("/r-projects")
         history.push(`/r-projects`)
-       
+
     }
 
 
@@ -41,7 +41,7 @@ function SignIn({updateUser, setPage}) {
     function onSubmit(e) {
         e.preventDefault()
         const user = {
-           username,
+            username,
             password
         }
 
@@ -61,29 +61,29 @@ function SignIn({updateUser, setPage}) {
                     res.json().then(json => alert(json.errors))
                 }
 
-                
+
             })
 
-    }    
+    }
 
 
 
 
 
 
-  
+
 
     return (<>
 
         <Container fluid>
             <Row className="justify-content-center">
                 <h1 style={{ textAlign: "center", padding: '20px' }}>Project Tracker</h1>
-                <FontAwesomeIcon style={{ padding: '50px' }} 
-                icon={faBuilding} size="9x" className="center" bounce />
+                <FontAwesomeIcon style={{ padding: '50px' }}
+                    icon={faBuilding} size="9x" className="center" bounce />
                 <Card style={{ width: '18rem', padding: '25px' }}>
                     <Card.Body>
                         <Form onSubmit={onSubmit}>
-                        <h3 style={{ textAlign: "center",}}>Login</h3>
+                            <h3 style={{ textAlign: "center", }}>Login</h3>
                             <Form.Group className="mb-3" controlId="formBasicEmail">
                                 <Form.Label>Username</Form.Label>
                                 <Form.Control name="username" placeholder="Enter email" onChange={handleChange} />
@@ -95,13 +95,13 @@ function SignIn({updateUser, setPage}) {
                                 <Form.Label>Password</Form.Label>
                                 <Form.Control name="password" type="password" placeholder="Password" onChange={handleChange} />
                             </Form.Group>
-                            <Button style={{ margin: '10px'}} variant="primary" type="submit">
+                            <Button style={{ margin: '10px' }} variant="primary" type="submit">
                                 Submit
-                            </Button>                           
-                        </Form>
-                        <Button onClick = {handleGuestSignIn} style={{ margin: '10px'}} size="sm" variant="secondary" type="submit">
-                                Guest Sign In
                             </Button>
+                        </Form>
+                        <Button onClick={handleGuestSignIn} style={{ margin: '10px' }} size="sm" variant="secondary" type="submit">
+                            Guest Sign In
+                        </Button>
                     </Card.Body>
                 </Card>
             </Row >
