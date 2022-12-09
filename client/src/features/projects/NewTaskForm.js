@@ -21,7 +21,7 @@ function NewTaskForm ({id}) {
     const initialTask = {
          hours: 1,
          description: '',
-         employee_id: 1,
+         employee_id: employees[0].id,
          project_id: `${id}`
      }
 
