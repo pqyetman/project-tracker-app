@@ -12,6 +12,7 @@ Employee.all.each {|e| e.delete}
 Customer.all.each {|e| e.delete}
 Project.all.each {|e| e.delete}
 Task.all.each {|e| e.delete}
+User.all.each {|e| e.delete}
 
 
 10.times do 
@@ -64,7 +65,7 @@ User.create(
 
 username: "Admin2",
 password: "Admin2",
-employee_id: 2
+employee_id: Employee.all.ids.sample
 
 )
 
