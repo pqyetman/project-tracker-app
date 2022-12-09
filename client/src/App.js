@@ -94,7 +94,7 @@ function App() {
 
 useEffect(() => {
 
-    fetch( `http://www.7timer.info/bin/civillight.php?lon=${lng}&lat=${lat}&ac=0&lang=en&unit=metric&output=json&tzshift=0`)
+    fetch( `https://www.7timer.info/bin/civillight.php?lon=${lng}&lat=${lat}&ac=0&lang=en&unit=metric&output=json&tzshift=0`)
     .then((res) => res.json())
     .then(data => setWeather(data.dataseries));
   

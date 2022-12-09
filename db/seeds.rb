@@ -60,6 +60,14 @@ end
 
 end
 
+User.create(
+
+username: "Admin2",
+password: "Admin2",
+employee_id: 2
+
+)
+
 
 
 puts "✅ Done seeding!"
