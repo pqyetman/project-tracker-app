@@ -20,7 +20,7 @@ function Customers({searchData}) {
    
     return (
         <>
-           <Container className="bg-dark" fluid>
+        
             <Table className="px-0" striped bordered hover variant="dark">
                 <thead>
                     <tr>
@@ -31,8 +31,8 @@ function Customers({searchData}) {
                 </thead>
                 {mappedCustomers}
             </Table>
-            {customerStatus === "loading" ? <Row className="justify-content-center" > <FontAwesomeIcon style={{ padding: '50px' }} icon={faBuilding} size="9x" className="center" bounce /> </Row>: ""}
-            </Container>
+            {customerStatus === "loading" ? <Row className="justify-content-center" > <FontAwesomeIcon style={{ padding: '50px', color: "white" }} icon={faBuilding} size="9x" className="center" bounce /> </Row>: ""}
+        
         </>
 
     )

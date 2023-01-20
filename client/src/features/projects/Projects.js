@@ -29,8 +29,8 @@ function Projects({ searchData }) {
 
     return (
         <>
-            <Container fluid style={{ height: "100%" }} className="text-white bg-dark pb-5">
-                <Table striped bordered hover variant="dark">
+           
+                <Table striped bordered hover variant="dark" responsive>
                     <thead>
                         <tr>
                             <th>Project Description </th>
@@ -42,8 +42,8 @@ function Projects({ searchData }) {
                     </thead>
                     {mappedProjects}
                 </Table>
-                {projectsStatus === "loading" ? <Row className="justify-content-center" > <FontAwesomeIcon style={{ padding: '50px' }} icon={faBuilding} size="9x" className="center" bounce /> </Row> : ""}
-            </Container>
+                {projectsStatus === "loading" ? <Row className="justify-content-center" > <FontAwesomeIcon style={{ padding: '50px', color: "white" }} icon={faBuilding} size="9x" className="center" bounce /> </Row> : ""}
+          
         </>)
 }
 
