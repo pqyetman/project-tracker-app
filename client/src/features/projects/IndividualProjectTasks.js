@@ -3,32 +3,58 @@ import Table from 'react-bootstrap/Table';
 import NewTaskForm from './NewTaskForm';
 import Accordion from 'react-bootstrap/Accordion';
 import TasksTable from './TasksTable';
+import { useAccordionButton } from 'react-bootstrap/AccordionButton';
+import Card from 'react-bootstrap/Card';
 
 function IndividualProjectTasks(props) {
 
-    const {project, task}=props
+    const { project, task } = props
 
-    const {customer, description, id} = project
+    const { customer, description, id } = project
 
-    let mappedTasks = task.map(task => <TasksTable key={task.id} task={task}/>)
+    let mappedTasks = task.map(task => <TasksTable key={task.id} task={task} />)
 
+
+    //Custome Button for Accordian
+
+    function ContextAwareToggle({ children, eventKey, callback }) {
+
+
+        const decoratedOnClick = useAccordionButton(
+            eventKey,
+            () => callback && callback(eventKey),
+        );
+
+
+
+        return (
+            <button className="rounded-pill"
+                type="button"
+                style={{ backgroundColor: 'white',
+                color: "black" }}
+                onClick={decoratedOnClick}
+            >
+                {children}
+            </button>
+        );
+    }
 
 
     return (
-        <Modal 
+        <Modal className="text-white"
             {...props}
             size="lg"
             aria-labelledby="contained-modal-title-vcenter"
             centered
-           // style={{ color: '#ccc' }}
+        // scrollable={true}
         >
-            <Modal.Header closeButton>
+            <Modal.Header closeVariant='white' closeButton className="bg-dark text-white">
                 <Modal.Title id="contained-modal-title-vcenter">
-                   <h4> Project: {description} </h4>
-                   <h4> Customer: {customer.name} </h4>
+                    <h4> Project: {description} </h4>
+                    <h4> Customer: {customer.name} </h4>
                 </Modal.Title>
             </Modal.Header>
-            <Modal.Body>
+            <Modal.Body className="bg-dark text-white">
                 <Table striped bordered hover size="sm" variant="dark">
                     <thead>
                         <tr>
@@ -40,21 +66,26 @@ function IndividualProjectTasks(props) {
                         </tr>
                     </thead>
                     <tbody>
-                    {mappedTasks}
+                        {mappedTasks}
                     </tbody>
                 </Table>
             </Modal.Body>
-            <Modal.Footer>
+            <Modal.Footer className="bg-dark text-white justify-content-start">
+                <Accordion defaultActiveKey="1" className="bg-dark text-white border-0 w-100">
+                    <Card className="bg-dark text-white border-0">
+                        <Card.Header>
+                            <ContextAwareToggle eventKey="0">Click to Enter A Task</ContextAwareToggle>
+                        </Card.Header>
+                        <Accordion.Collapse eventKey="0">
+                            <Card.Body> 
+                                <NewTaskForm id={id} />
+                                </Card.Body>
+                        </Accordion.Collapse>
+                    </Card>
+                </Accordion>            
             </Modal.Footer>
-            <Accordion defaultActiveKey="1">
-                <Accordion.Item eventKey="0">
-                    <Accordion.Header>Click To Add A Task</Accordion.Header>
-                    <Accordion.Body>
-                        <NewTaskForm id={id}/>
-                    </Accordion.Body>
-                </Accordion.Item>
-            </Accordion>
         </Modal>
+
     );
 
 }

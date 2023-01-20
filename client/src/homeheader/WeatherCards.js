@@ -1,6 +1,6 @@
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
-
+import Row from 'react-bootstrap/Row';
 import ListGroup from 'react-bootstrap/ListGroup';
 import {
     TiWeatherCloudy, TiWeatherShower, TiWeatherSnow, TiWeatherStormy, TiWeatherSunny, TiWeatherWindyCloudy,
@@ -161,20 +161,22 @@ function WeatherCards({ day }) {
 
     return (
 
-        <Col>
-            <Card style={{ width: '20rem' }}>
+   
+            <Card style={{ width: '18rem' }} className="text-center bg-dark text-white border-white">
+                <Row className="text-center">
                 {displayPicture}
+                </Row>
                 <Card.Body>
                     <Card.Title>{reverseDate}</Card.Title>
                 </Card.Body>
-                <ListGroup className="list-group-flush">
-                    <ListGroup.Item>Conditions: {displayString}</ListGroup.Item>
-                    <ListGroup.Item>Max Temp: {fahrenheightWeatherMax}</ListGroup.Item>
-                    <ListGroup.Item>Min Temp: {fahrenheightWeatherMin}</ListGroup.Item>
-                    <ListGroup.Item>Wind Description: {windTranslation}</ListGroup.Item>
+                <ListGroup className="list-group-flush border-white ">
+                    <ListGroup.Item className="text-center border-white bg-dark text-white">Conditions: {displayString}</ListGroup.Item>
+                    <ListGroup.Item className="text-center border-white bg-dark text-white">Max Temp: {fahrenheightWeatherMax}</ListGroup.Item>
+                    <ListGroup.Item className="text-center border-white bg-dark text-white">Min Temp: {fahrenheightWeatherMin}</ListGroup.Item>
+                    <ListGroup.Item className="text-center border-white bg-dark text-white">Wind Description: {windTranslation}</ListGroup.Item>
                 </ListGroup>
             </Card>
-        </Col>
+     
 
     );
 }

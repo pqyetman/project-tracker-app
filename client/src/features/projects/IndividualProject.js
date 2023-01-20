@@ -72,7 +72,7 @@ function IndividualProject({project}) {
             <td onClick = {retrieveTasks}>{description}</td>
             <td>{customer.name}</td>
             <td>{estimated_total_hours}</td>
-            <td>{open ? <ProgressBar now={now} label={`${now}%`} /> : "Project Closed"}</td>
+            <td>{open ? <ProgressBar now={now} animated variant="info" label={`${now}%`} /> : "Project Closed"}</td>
             <td><button onClick = {changeProjectStatus}>{open ? <MdOutlineDoneAll/> : <MdFolderOpen/>}</button></td>
           </tr>
           </tbody>

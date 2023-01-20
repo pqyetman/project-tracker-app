@@ -84,13 +84,10 @@ function CustomerNewProjForm({ customer }) {
 
     return (
         <>
-            <Form onSubmit={onSubmit}>
+            <Form onSubmit={onSubmit} className= "text-center p-4">
                 <Form.Group className="mb-3" >
-                    <Form.Label>Project Description</Form.Label>
-                    <Form.Control onChange={handleChange} name="description" placeholder="Enter Task Description" />
-                    <Form.Text className="text-muted">
-                        Please enter a task done for this project
-                    </Form.Text>
+                    <Form.Label>Project Name</Form.Label>
+                    <Form.Control onChange={handleChange} name="description" placeholder="Enter Project Name" />                 
                 </Form.Group>
                 <Form.Group className="mb-3" >
                     <Form.Label>Estimated Total Hours</Form.Label>
@@ -98,7 +95,7 @@ function CustomerNewProjForm({ customer }) {
                         {hoursSelect}
                     </Form.Select>
                 </Form.Group>
-                <Button style={{ margin: '10px' }} variant="primary" type="submit">
+                <Button style={{ margin: '10px' }} variant="secondary" type="submit">
                     Submit
                 </Button>
             </Form>

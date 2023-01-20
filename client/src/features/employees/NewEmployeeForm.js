@@ -79,24 +79,21 @@ function NewEmployeeForm({ }) {
 
     return (
         <>
-            <Form onSubmit={onSubmit} className="text center">              
-                    <Col md={{ span: 6, offset: 3 }} >
-                        <Row className="content-center">
+            <Row md={10} className="d-flex justify-content-center">
+                <Form onSubmit={onSubmit} className="text center">                    
                         <Form.Group className="mb-3" >
                             <Form.Label>Employee Name</Form.Label>
                             <Form.Control onChange={handleChange} name="name" placeholder="Enter Employee Name" />
-                          
                         </Form.Group>
                         <Form.Group className="mb-3" >
                             <Form.Label>Employee Title</Form.Label>
                             <Form.Control onChange={handleChange} name="title" placeholder="Enter Employee Title" />
-                        </Form.Group>
-                        </Row>
-                    </Col>             
-                <Button style={{ margin: '10px' }} variant="primary" type="submit">
-                    Submit
-                </Button>
-            </Form>
+                        </Form.Group>                  
+                    <Button style={{ margin: '10px' }} variant="secondary" type="submit">
+                        Submit
+                    </Button>
+                </Form>
+            </Row>
         </>
     );
 }

@@ -70,38 +70,37 @@ function SignIn({ updateUser, setPage }) {
 
 
 
-
-
-
     return (<>
 
-        <Container fluid>
-            <Row className="justify-content-center">
-                <h1 style={{ textAlign: "center", padding: '20px' }}>Project Tracker</h1>
-                <FontAwesomeIcon style={{ padding: '50px' }}
+        <Container fluid style={{height: "100vh"}} className="bg-dark text-white">
+            <Row className="d-flex justify-content-center">
+                <h1 style={{ textAlign: "center", paddingTop: '20px' }}>Project Tracker</h1>
+                <FontAwesomeIcon style={{ paddingTop: '60px', paddingBottom: '20px', paddingRight: '0px' }}
                     icon={faBuilding} size="9x" className="center" bounce />
-                <Card style={{ width: '18rem', padding: '25px' }}>
+                <Card style={{ width: '18rem', paddingTop: '15px' }} className="text-center text-black" >
                     <Card.Body>
-                        <Form onSubmit={onSubmit}>
-                            <h3 style={{ textAlign: "center", }}>Login</h3>
-                            <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <h3>Login </h3>
+                        <Form onSubmit={onSubmit} className="text-center">
+                            <Form.Group className="my-3" controlId="formBasicEmail">
                                 <Form.Label>Username</Form.Label>
                                 <Form.Control name="username" placeholder="Enter email" onChange={handleChange} />
                                 <Form.Text className="text-muted">
-                                    Please enter a domain specific username
+                                    Please enter a username
                                 </Form.Text>
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="formBasicPassword">
                                 <Form.Label>Password</Form.Label>
                                 <Form.Control name="password" type="password" placeholder="Password" onChange={handleChange} />
                             </Form.Group>
-                            <Button style={{ margin: '10px' }} variant="primary" type="submit">
-                                Submit
+                            <Button variant="dark" type="submit" >
+                                Log In
                             </Button>
                         </Form>
-                        <Button onClick={handleGuestSignIn} style={{ margin: '10px' }} size="sm" variant="secondary" type="submit">
-                            Guest Sign In
-                        </Button>
+                        <Row className="d-flex justify-content-center">
+                            <Button className="mt-2 w-50" onClick={handleGuestSignIn} size="md" variant="secondary" type="submit">
+                                Guest Sign In
+                            </Button>
+                        </Row>
                     </Card.Body>
                 </Card>
             </Row >

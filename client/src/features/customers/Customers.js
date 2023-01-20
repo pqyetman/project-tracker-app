@@ -4,6 +4,7 @@ import IndividualCustomer from "./IndividualCustomer"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBuilding } from '@fortawesome/free-solid-svg-icons'
 import Row from 'react-bootstrap/Row';
+import Container from 'react-bootstrap/Container';
 
 
 function Customers({searchData}) {
@@ -19,8 +20,8 @@ function Customers({searchData}) {
    
     return (
         <>
-           
-            <Table striped bordered hover variant="dark">
+           <Container className="bg-dark" fluid>
+            <Table className="px-0" striped bordered hover variant="dark">
                 <thead>
                     <tr>
                         <th>Customer Name</th>
@@ -31,6 +32,7 @@ function Customers({searchData}) {
                 {mappedCustomers}
             </Table>
             {customerStatus === "loading" ? <Row className="justify-content-center" > <FontAwesomeIcon style={{ padding: '50px' }} icon={faBuilding} size="9x" className="center" bounce /> </Row>: ""}
+            </Container>
         </>
 
     )

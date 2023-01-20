@@ -1,10 +1,14 @@
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faDoorOpen } from '@fortawesome/free-solid-svg-icons'
 
 function Navigation({ setSearchData, currentUser, setPage, updateUser }) {
 
@@ -42,17 +46,17 @@ function Navigation({ setSearchData, currentUser, setPage, updateUser }) {
             setPage("/")
             history.push("/")
         });
-        
-    
+
+
 
     }
 
-    
+
 
 
     return (
-        <Navbar bg="dark" variant="dark" expand="lg" sticky="top" >
-            <Container fluid>
+        <Navbar bg="dark" variant="dark" expand="md" sticky="top" className="border-bottom border-white">
+            <Container fluid style={{ width: "100%" }}>
                 <Navbar.Brand href="/r-projects">Projects</Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
@@ -62,27 +66,37 @@ function Navigation({ setSearchData, currentUser, setPage, updateUser }) {
                         navbarScroll
                     >
                         <Nav.Link href="/r-customers">Customers</Nav.Link>
-                        <Nav.Link href="/r-employees">Employees</Nav.Link>                    
-                    </Nav>                  
-                    <Form.Group className="d-flex">
-                        <Form.Control style={{ margin: "0px 20px 0px 3px" }}
-                            onChange={handleSearch}
-                            type="search"
-                            placeholder="Search"
-                            className="me-2"
-                            aria-label="Search"
-                        />
-                    </Form.Group>
-                    <Form.Group className="d-flex" style={{ color: "white" }}>
-                        <Form.Label style={{ margin: "0px 20px 0px 3px" }}>Search Field</Form.Label>
-                        <Form.Select size="sm" disabled style={{ margin: "0px 20px 0px 3px" }}>
-                            <option>{searchField}</option>
-                        </Form.Select>
-                    </Form.Group>
-                    <Button onClick={signOut} size="sm" variant="secondary">Sign Out</Button>
+                        <Nav.Link href="/r-employees">Employees</Nav.Link>
+                    </Nav>
+
+                    <Row className="d-flex flex-column flex-md-row justify-content-around ">
+                        <Col xs={8} md={6} className="my-2 my-md-0">
+                            <Form.Group >
+                                <Form.Control
+                                    onChange={handleSearch}
+                                    type="search"
+                                    placeholder="Search"
+                                    aria-label="Search"
+
+                                />
+                            </Form.Group >
+                        </Col>
+                        <Col  xs={8} md={4} className="my-2 my-md-0">
+                            <Form.Group >
+                                <Form.Select >
+                                    <option>{searchField}</option>
+                                </Form.Select>
+                            </Form.Group>
+                        </Col>
+                        <Col  xs={8} md={2} className="my-2 my-md-0">
+                            <Button onClick={signOut} size="sm" variant="outline-secondary">
+                                <FontAwesomeIcon icon={faDoorOpen} size="2x" className="center" />
+                            </Button>
+                        </Col>
+                    </Row>
                 </Navbar.Collapse>
-            </Container>
-        </Navbar>
+            </Container >
+        </Navbar >
     );
 }
 

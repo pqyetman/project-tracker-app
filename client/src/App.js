@@ -58,14 +58,6 @@ function App() {
     dispatch(fetchCustomers());
     dispatch(fetchEmployees());
 
-    console.log(`this is lat ${lat}`)
-
-    console.log(`this is lng ${lng}`)
-    console.log(`this is status ${status}`)
-    console.log(`this is weather ${weather}`)
-    console.log(`this is page ${page}`)
-
-
 
     setPage(window.location.pathname)
 
@@ -84,11 +76,8 @@ function App() {
 
         getLocation() 
     
-    }
-
-
-   
-    console.log("Get Location Use Effect");     
+    }   
+  
          
   }, []);
 
@@ -98,7 +87,7 @@ useEffect(() => {
     .then((res) => res.json())
     .then(data => setWeather(data.dataseries));
   
-    console.log("Fetch Use Effect");  
+   ;  
 
   }, [lng, lat]);
 

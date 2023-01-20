@@ -1,5 +1,15 @@
 .App {
   text-align: center;
+  background-color: #282c34;
+}
+
+:root {
+    
+  /* App Settings */
+  --header-color: #282c34;
+  --footer-color: #282c34;
+  --color-background-body: #282c34;
+
 }
 
 .App-logo {
@@ -32,6 +42,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

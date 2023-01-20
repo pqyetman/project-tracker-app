@@ -17,25 +17,25 @@ function CustomerProjects({ name, handleClose, customer, ...props }) {
 
   return (
     <>
-      <Offcanvas show={show} onHide={handleClose} {...props}>
-        <Offcanvas.Header closeButton>
-          <Offcanvas.Title ><h3>{customer.name}</h3></Offcanvas.Title>
+      <Offcanvas show={show} onHide={handleClose} {...props} className="text-white text-center bg-dark">
+        <Offcanvas.Header closeButton closeVariant="white">
+          <Offcanvas.Title >Customer: {customer.name} </Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           <Col >
-            <Row className="content-center">
-
-              <h4>Exisiting Projects</h4>
-              <ul style={{color: "red", paddingLeft: "40px"}}><strong>Closed Projects</strong>
-                {mappedClosedProjs}
-              </ul>
-              <ul style={{color: "green", paddingLeft: "40px"}}><strong>Open Projects</strong>
-                {mappedOpenProjs}
-              </ul>
-            </Row>
-            <Row style={{border: "1px solid"}}  className="content-center">
+            <Row style={{ border: "1px solid" }} className="text-center pt-2">
               <h4>Create a New Project</h4>
               <CustomerNewProjForm customer={customer} />
+            </Row>
+            <Row className="text-center d-flex justify-content-center pt-2">              
+
+              <h4>Projects</h4>
+              <ul style={{ color: "green", listStyle: "none" }}><strong><u>Open Projects</u></strong>
+                {mappedOpenProjs}
+              </ul>
+              <ul style={{ color: "red", listStyle: "none" }}><strong><u>Closed Projects</u></strong>
+                {mappedClosedProjs}
+              </ul>
             </Row>
           </Col>
         </Offcanvas.Body>

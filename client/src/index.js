@@ -12,7 +12,7 @@ ReactDOM.render(
 
   <BrowserRouter>
     <Provider store={store}>
-      <App />
+      <App className="bg-dark" />
     </Provider>
   </BrowserRouter>,
   document.getElementById('root')
