@@ -4,7 +4,7 @@ import IndividualCustomer from "./IndividualCustomer"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBuilding } from '@fortawesome/free-solid-svg-icons'
 import Row from 'react-bootstrap/Row';
-import Container from 'react-bootstrap/Container';
+
 
 
 function Customers({searchData}) {

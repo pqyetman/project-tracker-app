@@ -34,7 +34,7 @@ function Employees({ searchData }) {
                         <span className="ms-2"><Button variant="outline-secondary" onClick={handleShow} className="me-2 rounded-end-circle"
                             >Create Employee</Button>
                             </span>
-                        <NewEmployeeOC show={modalShow} handleClose={handleClose} />
+                        <NewEmployeeOC show={modalShow} handleclose={handleClose} />
                     </Row>
                 </Row>
                 <Row xs={2} md={5} className="g-4 text-center bg-dark pb-5">

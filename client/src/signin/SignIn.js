@@ -5,10 +5,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBuilding } from '@fortawesome/free-solid-svg-icons'
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
-import { useHistory } from 'react-router-dom'
-import { useState } from 'react'
+import { useHistory } from 'react-router-dom';
+import { useState } from 'react';
+
 
 function SignIn({ updateUser, setPage }) {
+
+    
+
+
 
     const [formData, setFormData] = useState({
         username: '',

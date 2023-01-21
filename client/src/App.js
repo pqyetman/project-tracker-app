@@ -4,12 +4,12 @@ import Employees from "./features/employees/Employees"
 import Customers from "./features/customers/Customers"
 import Projects from "./features/projects/Projects"
 import HomeCarousel from "./homeheader/HomeCarousel";
-import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
+import Navigation from "./navbar/Navigation";
+import { useDispatch } from "react-redux";
 import { fetchProjects } from "./features/projects/projectsSlice";
 import { fetchCustomers } from "./features/customers/customersSlice";
 import { fetchEmployees } from "./features/employees/employeesSlice";
-import Navigation from "./navbar/Navigation"
 
 function App() {
 
@@ -22,8 +22,8 @@ function App() {
   const [page, setPage] = useState("/")
 
 
-
   const dispatch = useDispatch();
+
 
 
   const getLocation = () => {
@@ -54,16 +54,18 @@ function App() {
       console.log(`current user ${currentUser}`)
     })
 
+
     dispatch(fetchProjects());
     dispatch(fetchCustomers());
-    dispatch(fetchEmployees());
+    dispatch(fetchEmployees());  
+
 
 
     setPage(window.location.pathname)
 
 
 
-  }, []);
+  }, [dispatch, currentUser]);
 
 
   useEffect(() => {
@@ -79,7 +81,7 @@ function App() {
     }   
   
          
-  }, []);
+  });
 
 useEffect(() => {
 

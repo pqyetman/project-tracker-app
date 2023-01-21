@@ -3,15 +3,15 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import NewEmployeeForm from './NewEmployeeForm';
 import Row from 'react-bootstrap/Row';
 
-function NewEmployeeOC({ ...props }) {
+function NewEmployeeOC({ handleclose, show }) {
 
 
-  const { handleClose, show } = props;
+
 
   return (
     <>
 
-      <Offcanvas className="bg-dark text-white"onHide={handleClose} show={show} {...props}>
+      <Offcanvas className="bg-dark text-white"onHide={handleclose} show={show} >
         <Offcanvas.Header closeButton closeVariant="white">    
         </Offcanvas.Header>
         <Offcanvas.Body>

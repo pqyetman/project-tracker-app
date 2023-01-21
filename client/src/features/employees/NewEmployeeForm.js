@@ -1,17 +1,15 @@
 import Button from 'react-bootstrap/Button';
 import { useState } from 'react'
 import Form from 'react-bootstrap/Form';
-import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import { useHistory } from 'react-router-dom'
 import { useDispatch } from "react-redux";
 import { employeeAdded } from "../employees/employeesSlice";
 
 
-function NewEmployeeForm({ }) {
+function NewEmployeeForm() {
 
 
-    const history = useHistory()
+
     const dispatch = useDispatch();
 
     const [formData, setFormData] = useState({

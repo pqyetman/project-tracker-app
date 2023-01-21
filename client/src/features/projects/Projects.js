@@ -3,9 +3,9 @@ import IndividualProject from "./IndividualProject";
 import Table from 'react-bootstrap/Table';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBuilding } from '@fortawesome/free-solid-svg-icons'
-import { useEffect } from "react";
+
 import Row from 'react-bootstrap/Row';
-import Container from 'react-bootstrap/Container';
+
 
 function Projects({ searchData }) {
 
@@ -20,12 +20,7 @@ function Projects({ searchData }) {
 
 
 
-    useEffect(() => {
-
-        console.log(projectsStatus)
-        console.log("Project Render")
-
-    }, []);
+  
 
     return (
         <>

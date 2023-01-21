@@ -1,7 +1,7 @@
 import Button from 'react-bootstrap/Button';
 import { useState } from 'react'
 import Form from 'react-bootstrap/Form';
-import { useHistory } from 'react-router-dom'
+
 import { useDispatch } from "react-redux";
 import { customersUpdated } from "../customers/customersSlice";
 
@@ -10,7 +10,7 @@ function CustomerNewProjForm({ customer }) {
     const hoursArray = [25, 50, 75, 100, 125, 150, 175, 200]
     const hoursSelect = hoursArray.map(hour => (<option key={hour} value={hour} >{hour}</option>))
 
-    const history = useHistory()
+  
     const dispatch = useDispatch();
 
     const [formData, setFormData] = useState({
