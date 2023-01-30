@@ -65,7 +65,7 @@ function App() {
 
 
 
-  }, [dispatch, currentUser]);
+  }, []);
 
 
   useEffect(() => {
@@ -81,7 +81,7 @@ function App() {
     }   
   
          
-  });
+  }, []);
 
 useEffect(() => {
 
@@ -91,7 +91,7 @@ useEffect(() => {
   
    ;  
 
-  }, [lng, lat]);
+  }, []);
 
 
   return (
