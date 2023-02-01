@@ -2,14 +2,17 @@ import Form from 'react-bootstrap/Form';
 import { useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import { useSelector } from "react-redux";
+import { projectsUpdated } from "../projects/projectsSlice";
 import { taskAdded } from "../tasks/tasksSlice";
 import { useDispatch } from "react-redux";
 import Row from 'react-bootstrap/Row';
 
-function NewTaskForm({ id }) {
+function NewTaskForm({ id, project }) {
 
     const dispatch = useDispatch();
     const employees = useSelector((state) => state.employees.entities);
+    
+ 
 
 
     const hoursArray = [1, 2, 3, 4, 5, 6, 7, 8]
@@ -44,8 +47,10 @@ function NewTaskForm({ id }) {
 
 
     function onSubmit(e) {
+
         e.preventDefault()
-        console.log(formData)
+          
+        
         const task = {
             hours,
             description,
@@ -53,7 +58,8 @@ function NewTaskForm({ id }) {
             project_id
 
         }
-        console.log(task)
+
+   
         fetch(`/tasks`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -63,16 +69,13 @@ function NewTaskForm({ id }) {
                 if (res.ok) {
                     res.json().then(task => {
 
-                        console.log(task)
+                      
 
                         const employeeTitle = employees.find(employee => employee.id === task.employee_id).title
 
-
-
                         const employeeName = employees.find(employee => employee.id === task.employee_id).name
 
-                        console.log(employeeName)
-                        console.log(employeeTitle)
+                     
 
                         dispatch(taskAdded({
                             ...formData,
@@ -84,16 +87,22 @@ function NewTaskForm({ id }) {
 
                         }))
 
-                    })
-                    setFormData(initialTask)
-                } else {
-                    res.json().then(json => alert(json.errors))
-                }
+                        dispatch(projectsUpdated(
+                            {id: project.id,
+                            total: project.total + task.hours,
+                            open: project.open,}))
+                      
+                 
 
+                    })
+
+                    setFormData(initialTask)}
+                 else {
+                    res.json().then(json => alert(json.errors))
+                    setFormData(initialTask)
+                    }
 
             })
-
-
 
     }
 

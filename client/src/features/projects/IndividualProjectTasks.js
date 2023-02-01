@@ -4,15 +4,16 @@ import NewTaskForm from './NewTaskForm';
 import Accordion from 'react-bootstrap/Accordion';
 import TasksTable from './TasksTable';
 import { useAccordionButton } from 'react-bootstrap/AccordionButton';
+
 import Card from 'react-bootstrap/Card';
 
 function IndividualProjectTasks(props) {
 
     const { project, task } = props
 
-    const { customer, description, id } = project
+    const { customer_name, description, id } = project
 
-    let mappedTasks = task.map(task => <TasksTable key={task.id} task={task} />)
+    let mappedTasks = task.map(task => <TasksTable key={task.id} task={task} project={project}/>)
 
 
     //Custome Button for Accordian
@@ -51,7 +52,7 @@ function IndividualProjectTasks(props) {
             <Modal.Header closeVariant='white' closeButton className="bg-dark text-white">
                 <Modal.Title id="contained-modal-title-vcenter">
                     <h4> Project: {description} </h4>
-                    <h4> Customer: {customer.name} </h4>
+                    <h4> Customer: {customer_name} </h4>
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body className="bg-dark text-white">
@@ -78,7 +79,7 @@ function IndividualProjectTasks(props) {
                         </Card.Header>
                         <Accordion.Collapse eventKey="0">
                             <Card.Body> 
-                                <NewTaskForm id={id} />
+                                <NewTaskForm id={id} project={project}/>
                                 </Card.Body>
                         </Accordion.Collapse>
                     </Card>

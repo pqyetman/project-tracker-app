@@ -16,12 +16,10 @@ function IndividualProject({project}) {
     const [modalShow, setModalShow] = useState(false);
   //  const [task, setTask] = useState([])
 
-    const {tasks, customer, description, open, id, estimated_total_hours} = project
+    const {total, customer_name, description, open, id, estimated_total_hours} = project
 
-    let sumHours = tasks.map(tasks => tasks.hours)
-    .reduce( (previousValue, currentValue) => previousValue + currentValue, 0,);
 
-    let now = parseInt((sumHours/estimated_total_hours)*100) 
+    let now = parseInt((total/estimated_total_hours)*100) 
 
     function retrieveTasks () {
 
@@ -49,6 +47,7 @@ function IndividualProject({project}) {
                         console.log(project)
                         dispatch(projectsUpdated(
                             {id: project.id,
+                            total: project.total,
                             open: project.open,}))
                       
                     })
@@ -70,7 +69,7 @@ function IndividualProject({project}) {
         <tbody>
           <tr >
             <td onClick = {retrieveTasks}>{description}</td>
-            <td>{customer.name}</td>
+            <td>{customer_name}</td>
             <td>{estimated_total_hours}</td>
             <td>{open ? <ProgressBar now={now} animated variant="info" label={`${now}%`} /> : "Project Closed"}</td>
             <td><button onClick = {changeProjectStatus}>{open ? <MdOutlineDoneAll/> : <MdFolderOpen/>}</button></td>

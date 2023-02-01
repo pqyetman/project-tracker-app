@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row';
 import { v4 as uuid } from "uuid";
 
 
-function HomeCarousel({ lat, lng, status, weather }) {
+function HomeCarousel({  weather }) {
 
 
 

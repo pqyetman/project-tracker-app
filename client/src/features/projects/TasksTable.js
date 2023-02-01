@@ -1,8 +1,9 @@
 import Button from 'react-bootstrap/Button';
 import { tasksDeleted } from "../tasks/tasksSlice";
 import { useDispatch } from "react-redux";
+import {projectsUpdated} from "./projectsSlice"
 
-function TasksTable({ task }) {
+function TasksTable({ task, project }) {
 
     const dispatch = useDispatch();
 
@@ -16,6 +17,12 @@ function TasksTable({ task }) {
                 if (res.ok) {
                    console.log("Task Deleted")
                    dispatch(tasksDeleted(id))
+
+                   
+                   dispatch(projectsUpdated(
+                    {id: project.id,
+                    total: project.total - task.hours,
+                    open: project.open,}))
                     }
 
                  else {

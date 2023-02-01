@@ -20,7 +20,8 @@ const projectsSlice = createSlice({
     },
     projectsUpdated(state, action) {
       const project = state.entities.find((project) => project.id === action.payload.id);
-      project.open = action.payload.open;
+      project.open = action.payload.open
+      project.total = action.payload.total;
     },
     projectsDeleted(state, action) {
       
