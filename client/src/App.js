@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { fetchProjects } from "./features/projects/projectsSlice";
 import { fetchCustomers } from "./features/customers/customersSlice";
 import { fetchEmployees } from "./features/employees/employeesSlice";
+import { useSelector } from "react-redux";
 
 function App() {
 
@@ -23,12 +24,15 @@ function App() {
 
 
   const dispatch = useDispatch();
+  const projects = useSelector((state) => state.projects.entities)
 
 
 
   const getLocation = () => {
     if (!navigator.geolocation) {
       setStatus('Geolocation is not supported by your browser');
+      setLng(90.00)
+      setLat(-135.00)
     } else {
       setStatus('Locating...');
       navigator.geolocation.getCurrentPosition((position) => {
@@ -55,7 +59,7 @@ function App() {
     })
 
 
-    dispatch(fetchProjects());
+   
     dispatch(fetchCustomers());
     dispatch(fetchEmployees());  
 
@@ -67,6 +71,14 @@ function App() {
 
   }, []);
 
+  useEffect(()=>{
+
+    dispatch(fetchProjects());
+
+    console.log("fetch projects")
+
+  },[])
+
 
   useEffect(() => {
 
@@ -75,6 +87,8 @@ function App() {
     }
 
     else {
+
+      console.log("getting location")
 
         getLocation() 
     
@@ -86,6 +100,8 @@ function App() {
 useEffect(() => {
 
   if (lng & lat ) {
+
+    console.log("Fething weather data")
 
     fetch( `https://www.7timer.info/bin/civillight.php?lon=${lng}&lat=${lat}&ac=0&lang=en&unit=metric&output=json&tzshift=0`)
     .then((res) => res.json())
