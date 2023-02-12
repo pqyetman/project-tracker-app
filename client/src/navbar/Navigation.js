@@ -6,14 +6,18 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom'
+import { useHistory} from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDoorOpen } from '@fortawesome/free-solid-svg-icons'
+import { LinkContainer } from 'react-router-bootstrap'
 
-function Navigation({ setSearchData, currentUser, setPage, updateUser }) {
+function Navigation({ setSearchData, updateUser }) {
 
     const history = useHistory()
     const [searchField, setSearchField] = useState("None")
+   
+
+
 
 
     function handleSearch(e) {
@@ -43,7 +47,7 @@ function Navigation({ setSearchData, currentUser, setPage, updateUser }) {
             if (r.ok) {
                 updateUser(null);
             }
-            setPage("/")
+           
             history.push("/")
         });
 
@@ -57,7 +61,9 @@ function Navigation({ setSearchData, currentUser, setPage, updateUser }) {
     return (
         <Navbar bg="dark" variant="dark" expand="md" sticky="top" className="border-bottom border-white">
             <Container fluid style={{ width: "100%" }}>
-                <Navbar.Brand href="/r-projects">Projects</Navbar.Brand>
+                <LinkContainer to="/r-projects">
+                    <Navbar.Brand >Projects</Navbar.Brand>
+                </LinkContainer>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
                     <Nav
@@ -65,8 +71,12 @@ function Navigation({ setSearchData, currentUser, setPage, updateUser }) {
                         style={{ maxHeight: '100px' }}
                         navbarScroll
                     >
-                        <Nav.Link href="/r-customers">Customers</Nav.Link>
-                        <Nav.Link href="/r-employees">Employees</Nav.Link>
+                         <LinkContainer to="/r-customers">
+                        <Nav.Link >Customers</Nav.Link>
+                        </LinkContainer>
+                        <LinkContainer to="/r-employees">
+                        <Nav.Link >Employees</Nav.Link>
+                        </LinkContainer>
                     </Nav>
 
                     <Row className="d-flex flex-column flex-md-row justify-content-around ">
@@ -81,14 +91,14 @@ function Navigation({ setSearchData, currentUser, setPage, updateUser }) {
                                 />
                             </Form.Group >
                         </Col>
-                        <Col  xs={8} md={4} className="my-2 my-md-0">
+                        <Col xs={8} md={4} className="my-2 my-md-0">
                             <Form.Group >
                                 <Form.Select >
                                     <option>{searchField}</option>
                                 </Form.Select>
                             </Form.Group>
                         </Col>
-                        <Col  xs={8} md={2} className="my-2 my-md-0">
+                        <Col xs={8} md={2} className="my-2 my-md-0">
                             <Button onClick={signOut} size="sm" variant="outline-secondary">
                                 <FontAwesomeIcon icon={faDoorOpen} size="2x" className="center" />
                             </Button>

@@ -1,4 +1,4 @@
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useLocation } from "react-router-dom";
 import SignIn from "./signin/SignIn"
 import Employees from "./features/employees/Employees"
 import Customers from "./features/customers/Customers"
@@ -20,19 +20,18 @@ function App() {
   const [lng, setLng] = useState(null);
   const [status, setStatus] = useState(null);
   const [weather, setWeather] = useState([])
-  const [page, setPage] = useState("/")
-
+  
+ 
+  const { pathname } = useLocation();
 
   const dispatch = useDispatch();
-  const projects = useSelector((state) => state.projects.entities)
-
 
 
   const getLocation = () => {
     if (!navigator.geolocation) {
       setStatus('Geolocation is not supported by your browser');
-      setLng(90.00)
-      setLat(-135.00)
+      setLng("40.7")
+      setLat("-74.00")
     } else {
       setStatus('Locating...');
       navigator.geolocation.getCurrentPosition((position) => {
@@ -40,6 +39,8 @@ function App() {
         setLat(parseFloat(position.coords.latitude).toFixed(2));
         setLng(parseFloat(position.coords.longitude).toFixed(2));
       }, () => {
+        setLng("40.7")
+        setLat("-74.00")
         setStatus('Unable to retrieve your location');
       });
     }
@@ -49,6 +50,8 @@ function App() {
   const updateUser = (user) => setCurrentUser(user)
 
   useEffect(() => {
+    
+    if (lng === null & lat === null) {getLocation()}
 
   
     fetch("/me").then((r) => {
@@ -62,44 +65,19 @@ function App() {
    
     dispatch(fetchCustomers());
     dispatch(fetchEmployees());  
-
-
-
-    setPage(window.location.pathname)
+    dispatch(fetchProjects());  
 
 
 
   }, []);
 
-  useEffect(()=>{
-
-    dispatch(fetchProjects());
-
-    console.log("fetch projects")
-
-  },[])
 
 
-  useEffect(() => {
 
-    if (lng & lat ) {
-        console.log('lng at lat are good')
-    }
-
-    else {
-
-      console.log("getting location")
-
-        getLocation() 
-    
-    }   
-  
-         
-  }, []);
 
 useEffect(() => {
 
-  if (lng & lat ) {
+  if (typeof lng === "string" & typeof lat === "string" ) {
 
     console.log("Fething weather data")
 
@@ -107,8 +85,7 @@ useEffect(() => {
     .then((res) => res.json())
     .then(data => setWeather(data.dataseries));
 
-  }
-  
+  }  
 
 
   }, [lng, lat]);
@@ -117,13 +94,13 @@ useEffect(() => {
   return (
     <div>
 
-      <Navigation setPage={setPage} currentUser={currentUser} 
+      <Navigation  currentUser={currentUser} 
       updateUser={updateUser}
       setSearchData={setSearchData} />
-      {page === "/" ? <></> : <HomeCarousel lat={lat} lng={lng} status={status} weather={weather} />}
+      { pathname !== "/" ? <HomeCarousel lat={lat} lng={lng} status={status} weather={weather} /> : <></>}
       <Switch>
         <Route exact path="/">
-          <SignIn setPage={setPage} updateUser={updateUser} />
+          <SignIn  updateUser={updateUser} />
         </Route>
         <Route exact path="/r-customers">
           <Customers searchData={searchData} />

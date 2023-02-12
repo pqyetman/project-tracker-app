@@ -9,7 +9,7 @@ import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
 
 
-function SignIn({ updateUser, setPage }) {
+function SignIn({ updateUser }) {
 
     
 
@@ -35,9 +35,7 @@ function SignIn({ updateUser, setPage }) {
 
     const handleGuestSignIn = () => {
 
-
-        setPage("/r-projects")
-        history.push(`/r-projects`)
+       history.push(`/r-projects`)
 
     }
 
@@ -57,8 +55,7 @@ function SignIn({ updateUser, setPage }) {
         })
             .then(res => {
                 if (res.ok) {
-                    res.json().then(user => {
-                        setPage("/r-projects")
+                    res.json().then(user => {                     
                         updateUser(user)
                         history.push(`/r-projects`)
                     })
