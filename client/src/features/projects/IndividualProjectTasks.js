@@ -4,10 +4,16 @@ import NewTaskForm from './NewTaskForm';
 import Accordion from 'react-bootstrap/Accordion';
 import TasksTable from './TasksTable';
 import { useAccordionButton } from 'react-bootstrap/AccordionButton';
+import { useSelector } from "react-redux";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBuilding } from '@fortawesome/free-solid-svg-icons';
+import Row from 'react-bootstrap/Row';
 
 import Card from 'react-bootstrap/Card';
 
 function IndividualProjectTasks(props) {
+
+    const tasksStatus = useSelector((state) => state.tasks.status);
 
     const { project, task } = props
 
@@ -15,8 +21,7 @@ function IndividualProjectTasks(props) {
 
     let mappedTasks = task.map(task => <TasksTable key={task.id} task={task} project={project}/>)
 
-
-    //Custome Button for Accordian
+   
 
     function ContextAwareToggle({ children, eventKey, callback }) {
 
@@ -46,7 +51,7 @@ function IndividualProjectTasks(props) {
             {...props}
             size="lg"
             aria-labelledby="contained-modal-title-vcenter"
-            centered
+            centered                     
         // scrollable={true}
         >
             <Modal.Header closeVariant='white' closeButton className="bg-dark text-white">
@@ -56,7 +61,10 @@ function IndividualProjectTasks(props) {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body className="bg-dark text-white">
-                <Table striped bordered hover size="sm" variant="dark">
+            {tasksStatus === "loading" ? <Row className="justify-content-center" > 
+            <FontAwesomeIcon style={{ padding: '50px', color: "white" }} icon={faBuilding} size="5x" className="center" spin /> 
+            </Row> : ""}
+               { tasksStatus !== "loading" ? <Table striped bordered hover size="sm" variant="dark">
                     <thead>
                         <tr>
                             <th>Task</th>
@@ -69,7 +77,7 @@ function IndividualProjectTasks(props) {
                     <tbody>
                         {mappedTasks}
                     </tbody>
-                </Table>
+                </Table> : ""}
             </Modal.Body>
             <Modal.Footer className="bg-dark text-white justify-content-start">
                 <Accordion defaultActiveKey="1" className="bg-dark text-white border-0 w-100">

@@ -40,6 +40,7 @@ function Employees({ searchData }) {
                 <Row xs={2} md={5} className="g-4 text-center bg-dark pb-5">
                     {empMap}
                 </Row>
+                {filteredEmployees.length <= 0 ? <h2 className="text-center text-white">No Employees Match Search Input</h2>:""}
             </Container>
         </>
 

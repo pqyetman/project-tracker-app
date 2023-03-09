@@ -31,8 +31,9 @@ function Customers({searchData}) {
                 </thead>
                 {mappedCustomers}
             </Table>
+            {filteredCustomers.length <= 0 ? <h2 className="text-center text-white">No Customers Match Search Input</h2>:""}
             {customerStatus === "loading" ? <Row className="justify-content-center" > <FontAwesomeIcon style={{ padding: '50px', color: "white" }} icon={faBuilding} size="9x" className="center" bounce /> </Row>: ""}
-        
+
         </>
 
     )

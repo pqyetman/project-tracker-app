@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 
 import { useDispatch } from "react-redux";
 import { customersUpdated } from "../customers/customersSlice";
+import { projectAdded } from '../projects/projectsSlice';
 
 function CustomerNewProjForm({ customer }) {
 
@@ -54,6 +55,8 @@ function CustomerNewProjForm({ customer }) {
 
                         console.log(project)
 
+                        //update state in customers section
+
                         dispatch(customersUpdated({                           
                             id: customer.id,
                             projects: [...customer.projects,
@@ -63,10 +66,21 @@ function CustomerNewProjForm({ customer }) {
                                 open: true,
                                 customer_id: customer.id,
                                 estimated_total_hours: project.estimated_total_hours,
-                            }], })
+                            }], }) )
                             
-                          )})
-                      //  history.push(`/r-projects`)
+                            //update state in projects section
+                            dispatch(projectAdded({                           
+                                id: project.id,
+                                customer_id: customer.id,
+                                open: true,
+                                description: project.description,
+                                estimated_total_hours: project.estimated_total_hours,
+                                total: 0,
+                                customer_name: customer.name                              
+                                }))
+
+                         })
+                     
                     
                 } else {
                     res.json().then(json => alert(json.errors))

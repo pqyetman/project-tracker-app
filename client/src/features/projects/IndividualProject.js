@@ -6,6 +6,7 @@ import { fetchTasks } from "../tasks/tasksSlice";
 import {projectsUpdated} from "./projectsSlice"
 import { useSelector } from "react-redux";
 import {MdOutlineDoneAll, MdFolderOpen} from "react-icons/md";
+import Button from 'react-bootstrap/Button';
 
 
 
@@ -68,7 +69,7 @@ function IndividualProject({project}) {
         <>
         <tbody>
           <tr >
-            <td onClick = {retrieveTasks}>{description}</td>
+            <td onClick = {retrieveTasks}><Button variant="light">{description}</Button></td>
             <td>{customer_name}</td>
             <td>{estimated_total_hours}</td>
             <td>{open ? <ProgressBar now={now} animated variant="info" label={`${now}%`} /> : "Project Closed"}</td>

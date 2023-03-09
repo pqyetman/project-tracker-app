@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -5,19 +6,22 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { useState } from 'react';
 import { useHistory} from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDoorOpen } from '@fortawesome/free-solid-svg-icons'
 import { LinkContainer } from 'react-router-bootstrap'
+import ToastAlert from "./ToastAlert"
+
 
 function Navigation({ setSearchData, updateUser }) {
 
     const history = useHistory()
     const [searchField, setSearchField] = useState("None")
+    const [show, setShow] = useState(false);
+    const [toastmessage, setToastmessage] = useState("")
+
+
    
-
-
 
 
     function handleSearch(e) {
@@ -46,6 +50,15 @@ function Navigation({ setSearchData, updateUser }) {
         fetch("/logout", { method: "DELETE" }).then((r) => {
             if (r.ok) {
                 updateUser(null);
+                setToastmessage("You have successfully signed out of your account")
+                setShow(true)
+            }
+
+            else {
+
+                setToastmessage("You were not logged in and have been returned to the login screen")
+                setShow(true)
+
             }
            
             history.push("/")
@@ -59,8 +72,9 @@ function Navigation({ setSearchData, updateUser }) {
 
 
     return (
+        <>
         <Navbar bg="dark" variant="dark" expand="md" sticky="top" className="border-bottom border-white">
-            <Container fluid style={{ width: "100%" }}>
+            <Container fluid style={{ width: "100%" }}>            
                 <LinkContainer to="/r-projects">
                     <Navbar.Brand >Projects</Navbar.Brand>
                 </LinkContainer>
@@ -101,12 +115,23 @@ function Navigation({ setSearchData, updateUser }) {
                         <Col xs={8} md={2} className="my-2 my-md-0">
                             <Button onClick={signOut} size="sm" variant="outline-secondary">
                                 <FontAwesomeIcon icon={faDoorOpen} size="2x" className="center" />
-                            </Button>
-                        </Col>
+                            </Button>                           
+                        </Col>                      
                     </Row>
                 </Navbar.Collapse>
             </Container >
         </Navbar >
+        <div style={{ position: 'relative', zIndex: '100'}}>
+
+          <ToastAlert
+          className="justify-content-center"
+          onClose={()=>setShow(false)} 
+          show={show}
+          toastmessage={toastmessage}
+          
+          />
+          </div>
+          </>
     );
 }
 
