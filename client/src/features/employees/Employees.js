@@ -5,8 +5,9 @@ import { useState } from 'react';
 import Row from 'react-bootstrap/Row';
 import IndEmp from './IndividualEmployee'
 import Container from 'react-bootstrap/Container';
-
 import Col from 'react-bootstrap/Col';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBuilding } from '@fortawesome/free-solid-svg-icons'
 import NewEmployeeOC from "./NewEmployeeOC"
 
 
@@ -14,6 +15,7 @@ function Employees({ searchData }) {
 
     const [modalShow, setModalShow] = useState(false);
     const employees = useSelector((state) => state.employees.entities);
+    const employeesStatus = useSelector((state) => state.employees.status);
     const handleShow = () => setModalShow(true);
     const handleClose = () => setModalShow(false)
 
@@ -40,7 +42,9 @@ function Employees({ searchData }) {
                 <Row xs={2} md={5} className="g-4 text-center bg-dark pb-5">
                     {empMap}
                 </Row>
-                {filteredEmployees.length <= 0 ? <h2 className="text-center text-white">No Employees Match Search Input</h2>:""}
+                {filteredEmployees.length <= 0 && employeesStatus !== "loading" ? <h2 className="text-center text-white">No Employees Match Search Input</h2>: ""}
+                {employeesStatus === "loading" ? <Row className="justify-content-center" > <FontAwesomeIcon style={{ padding: '50px', color: "white" }} icon={faBuilding} size="9x" className="center" bounce /> </Row>: ""}
+
             </Container>
         </>
 

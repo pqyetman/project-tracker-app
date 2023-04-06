@@ -17,10 +17,12 @@ function IndividualProject({project}) {
     const [modalShow, setModalShow] = useState(false);
   //  const [task, setTask] = useState([])
 
-    const {total, customer_name, description, open, id, estimated_total_hours} = project
+    const {total, customer_name, description, open, id, estimated_total_hours, customer_id} = project
 
 
     let now = parseInt((total/estimated_total_hours)*100) 
+
+
 
     function retrieveTasks () {
 
@@ -50,6 +52,17 @@ function IndividualProject({project}) {
                             {id: project.id,
                             total: project.total,
                             open: project.open,}))
+
+                      /*    dispatch(customersProjectUpdated(
+                                {id: customer_id,
+                                projects: [ {
+                                        id: project.id,
+                                        open: project.open
+                                                }                         
+                                             ]
+                                })) */
+
+
                       
                     })
               

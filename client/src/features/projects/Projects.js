@@ -35,9 +35,9 @@ function Projects({ searchData }) {
                             <th>Close/Open</th>
                         </tr>
                     </thead>
-                    {filteredProjects.length> 0 ? mappedProjects : "" }
+                    {filteredProjects.length > 0 ? mappedProjects : "" }
                 </Table>
-                {filteredProjects.length> 0 ? "" : <h2 className="text-center text-white">No Projects Match Search Input</h2> }
+                {filteredProjects.length < 1 && projectsStatus !== "loading" ? <h2 className="text-center text-white">No Projects Match Search Input</h2> : "" }
                 {projectsStatus === "loading" ? <Row className="justify-content-center" > <FontAwesomeIcon style={{ padding: '50px', color: "white" }} icon={faBuilding} size="9x" className="center" bounce /> </Row> : ""}
 
         </>)

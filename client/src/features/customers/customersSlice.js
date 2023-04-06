@@ -21,7 +21,9 @@ const customersSlice = createSlice({
     customersUpdated(state, action) {
       const customer = state.entities.find((customer) => customer.id === action.payload.id);
       customer.projects = action.payload.projects;
-    },
+    }, 
+
+
     customersDeleted(state, action) {
       
       state.entities.filter(((customer) => customer.id !== action.payload.id));

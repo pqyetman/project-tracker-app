@@ -1,14 +1,18 @@
 import CustomerProjects from "./CustomerProjects";
 import Button from 'react-bootstrap/Button';
 import React, { useState } from 'react';
+import { useSelector } from "react-redux";
 
 function IndividualCustomer({ customer }) {
 
     const [show, setShow] = useState(false);
     const handleShow = () => setShow(true);
     const handleClose = () => setShow(false);
-    const {projects} = customer;
+    const {id} = customer;
 
+    const projects = useSelector((state) => state.projects.entities).filter(projects => projects.customer_id === id);
+
+    
 
     return (
         <>
